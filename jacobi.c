@@ -58,7 +58,8 @@ int main(void)
    while(err > tol && iter < iter_max)
    {
       err = 0.0;
-      #pragma omp target teams distribute parallel for reduction(max:err)
+      #pragma omp target teams distribute parallel for \
+        reduction(max:err) collapse(2) schedule(static,1)
       for(int i = 1; i < n-1; i++)
       {
          for(int j = 1; j < m-1; j++)
@@ -69,7 +70,8 @@ int main(void)
 	                                                     //3 if abs() counts
          }
       }
-      #pragma omp target teams distribute parallel for
+      #pragma omp target teams distribute parallel for \
+        collapse(2) schedule(static,1)
       for(int i = 1; i < n-1; i++)
       {
          for(int j = 1; j < m-1; j++)
@@ -116,3 +118,10 @@ int main(void)
 
 // Use GPU Teams (slide 29 on reference powerpoint)
 // 8      : 0.6239
+
+// Use GPU collapse and improved schedule
+// Forget to use main data alloc loop
+// 8      : 23.1350
+// Put the loop back in
+// 8      : 21.7621
+// hmm, still slow!
