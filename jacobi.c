@@ -1,3 +1,4 @@
+//#include "../oneMKL/mkl.hpp"
 #include <stdio.h>
 #include <omp.h>
 #include <stdlib.h>
@@ -51,10 +52,13 @@ int main(void)
    // showArray(A,n,m);
 ///////////////////////////////////////////////////////////////////////////////
    double time_start = omp_get_wtime();
+#pragma omp target data map(alloc:Anew) map(A) map(iter)
+// #pragma omp target
+{
    while(err > tol && iter < iter_max)
    {
       err = 0.0;
-      #pragma omp parallel for reduction(max:err)
+      #pragma omp target teams distribute parallel for reduction(max:err)
       for(int i = 1; i < n-1; i++)
       {
          for(int j = 1; j < m-1; j++)
@@ -65,7 +69,7 @@ int main(void)
 	                                                     //3 if abs() counts
          }
       }
-      #pragma omp parallel for
+      #pragma omp target teams distribute parallel for
       for(int i = 1; i < n-1; i++)
       {
          for(int j = 1; j < m-1; j++)
@@ -73,9 +77,10 @@ int main(void)
             A[i*m + j] = Anew[i*m + j];
          }
       }
-      // printf("iter: %02d\terr: %.4f \ttol: %.4f\n",iter,err,tol);
+      // printf("iter: %02d\terr: %.5f \ttol: %.5f\n",iter,err,tol);
       iter++;
    }
+}
    double time_stop = omp_get_wtime();
 ///////////////////////////////////////////////////////////////////////////////
    double time_total = time_stop-time_start;
@@ -102,3 +107,12 @@ int main(void)
 // 6      : 0.4051
 // 8      : 0.3706
 // 16     : 0.7277
+
+// Throw in the GPU (same params else):
+// 8      : 0.5962
+// 1      : 1.7419
+// 16     : 0.7973
+// 8      : 0.6646
+
+// Use GPU Teams (slide 29 on reference powerpoint)
+// 8      : 0.6239

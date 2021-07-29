@@ -1,6 +1,7 @@
 default:
 	icc -Wall -pedantic -fopenmp -O3 -o itestGEMM naivegemm.c
-	icc -Wall -pedantic -fopenmp -O3 -o itestjacobi jacobi.c
+	# icc -Wall -pedantic -fopenmp -O3 -o itestjacobi jacobi.c
+	icx -Wall -pedantic -fiopenmp -fopenmp -O3 -o itestjacobi jacobi.c
 
 debug:
 	icc -Wall -pedantic -fopenmp -g -o testGEMM naivegemm.c
