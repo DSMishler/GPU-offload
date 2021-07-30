@@ -1,0 +1,25 @@
+// intel devcloud qsub -I with simple CPU tasking
+// m=n=200, iter goes to 27774 here
+// threads: seconds
+// 1      : 0.8820
+// 2      : 0.6090
+// 4      : 0.4165
+// 6      : 0.4051
+// 8      : 0.3706
+// 16     : 0.7277
+
+// Throw in the GPU (same params else):
+// 8      : 0.5962
+// 1      : 1.7419
+// 16     : 0.7973
+// 8      : 0.6646
+
+// Use GPU Teams (slide 29 on reference powerpoint)
+// 8      : 0.6239
+
+// Use GPU collapse and improved schedule
+// Forget to use main data alloc loop
+// 8      : 23.1350
+// Put the loop back in
+// 8      : 21.7621
+// hmm, still slow!

@@ -1,0 +1,28 @@
+
+Jacobi iteration offload test: CPU
+m=1000	n=1000	tol=0.01
+iters: 4467
+process completed with:
+walltime of   1.0611s
+GFlops/s of  25.2583
+
+Jacobi iteration offload test: GPU0
+m=1000	n=1000	tol=0.01
+iters: 0
+process completed with:
+walltime of   1.3414s
+GFlops/s of   0.0000
+
+Jacobi iteration offload test: GPU Mapping
+m=1000	n=1000	tol=0.01
+iters: 4467
+process completed with:
+walltime of   1.3279s
+GFlops/s of  20.1830
+
+Jacobi iteration offload test: GPU Scheduling
+m=1000	n=1000	tol=0.01
+iters: 4467
+process completed with:
+walltime of  25.0594s
+GFlops/s of   1.0695

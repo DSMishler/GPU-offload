@@ -1,0 +1,116 @@
+Jacobi iteration offload test
+iters: 27774
+process completed with:
+walltime of   0.9934s
+GFlops/s of   6.7100
+Jacobi iteration offload test
+iters: 27774
+process completed with:
+walltime of   1.2754s
+GFlops/s of   5.2264
+Jacobi iteration offload test
+iters: 27774
+process completed with:
+walltime of   1.3589s
+GFlops/s of   4.9052
+Jacobi iteration offload test
+iters: 27774
+process completed with:
+walltime of  14.5456s
+GFlops/s of   0.4583
+Jacobi iteration offload test
+iters: 1282
+process completed with:
+walltime of   0.3493s
+GFlops/s of   0.8810
+Jacobi iteration offload test
+iters: 0
+process completed with:
+walltime of   0.3209s
+GFlops/s of   0.0000
+Jacobi iteration offload test
+iters: 1282
+process completed with:
+walltime of   0.4018s
+GFlops/s of   0.7657
+Jacobi iteration offload test
+iters: 1282
+process completed with:
+walltime of   0.9848s
+GFlops/s of   0.3124
+Jacobi iteration offload test: CPU
+m=200	,n=200	,tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.1780s
+GFlops/s of   1.7285
+Jacobi iteration offload test: GPU0
+m=200	,n=200	,tol=0.01
+iters: 0
+process completed with:
+walltime of   0.2776s
+GFlops/s of   0.0000
+Jacobi iteration offload test: GPU Mapping
+m=200	,n=200	,tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.3204s
+GFlops/s of   0.9604
+Jacobi iteration offload test: GPU Scheduling
+m=200	,n=200	,tol=0.01
+iters: 1282
+process completed with:
+walltime of   1.0727s
+GFlops/s of   0.2868
+Jacobi iteration offload test: CPU
+m=200	,n=200	,tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.2310s
+GFlops/s of   1.3317
+Jacobi iteration offload test: GPU0
+m=200	,n=200	,tol=0.01
+iters: 0
+process completed with:
+walltime of   0.3536s
+GFlops/s of   0.0000
+Jacobi iteration offload test: GPU Mapping
+m=200	,n=200	,tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.3822s
+GFlops/s of   0.8051
+Jacobi iteration offload test: GPU Scheduling
+m=200	,n=200	,tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.9775s
+GFlops/s of   0.3148
+
+Jacobi iteration offload test: CPU
+m=200	n=200	tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.3587s
+GFlops/s of   0.8578
+
+Jacobi iteration offload test: GPU0
+m=200	n=200	tol=0.01
+iters: 0
+process completed with:
+walltime of   0.3601s
+GFlops/s of   0.0000
+
+Jacobi iteration offload test: GPU Mapping
+m=200	n=200	tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.4081s
+GFlops/s of   0.7539
+
+Jacobi iteration offload test: GPU Scheduling
+m=200	n=200	tol=0.01
+iters: 1282
+process completed with:
+walltime of   0.8108s
+GFlops/s of   0.3795

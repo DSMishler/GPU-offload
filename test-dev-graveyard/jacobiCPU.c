@@ -22,35 +22,23 @@ void showArray(double *A,int n, int m)
    printf("\n");
 }
 
-int main(int nargs, char **argv)
+int main(void)
 {
-   printf("\nJacobi iteration offload test\n");
-   int iter, iter_max,n,m;
+   printf("Jacobi iteration offload test\n");
 
-   if(nargs == 1)
-   {
-      n = m = 200;
-   }
-   else if(nargs == 2)
-   {
-      m = 200;
-      n = atoi(argv[1]);
-   }
-   else // if(nargs > 2)
-   {
-      n = atoi(argv[1]);
-      m = atoi(argv[2]);
-   }
+
+
    double err, tol;
+   int iter, iter_max,n,m;
+   iter = 0;
    iter_max = 50000;
+   n = m = 200;
    err = 1; // just start it greater than tol
-   tol = 1e-2;
+   tol = 1e-4;
    double *A = malloc(n*m*sizeof(double));
    assert(A);
    double *Anew = malloc(n*m*sizeof(double));
    assert(Anew);
-   printf("m=%d\tn=%d\ttol=%g\n",m,n,tol);
-
 
    srand(0);
    for(int i = 0; i < n; i++)
@@ -61,15 +49,13 @@ int main(int nargs, char **argv)
       }
    }
    // showArray(A,n,m);
-   iter = 0;
 ///////////////////////////////////////////////////////////////////////////////
    double time_start = omp_get_wtime();
-#pragma omp target data map(alloc:Anew) map(A) map(iter)
 {
    while(err > tol && iter < iter_max)
    {
       err = 0.0;
-      #pragma omp target teams distribute parallel for \
+      #pragma omp parallel for \
         reduction(max:err)
       for(int i = 1; i < n-1; i++)
       {
@@ -81,7 +67,7 @@ int main(int nargs, char **argv)
 	                                                     //3 if abs() counts
          }
       }
-      #pragma omp target teams distribute parallel for
+      #pragma omp parallel for
       for(int i = 1; i < n-1; i++)
       {
          for(int j = 1; j < m-1; j++)

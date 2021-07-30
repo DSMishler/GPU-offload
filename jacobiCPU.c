@@ -24,7 +24,7 @@ void showArray(double *A,int n, int m)
 
 int main(int nargs, char **argv)
 {
-   printf("\nJacobi iteration offload test\n");
+   printf("\nJacobi iteration offload test: CPU\n");
    int iter, iter_max,n,m;
 
    if(nargs == 1)
@@ -51,7 +51,6 @@ int main(int nargs, char **argv)
    assert(Anew);
    printf("m=%d\tn=%d\ttol=%g\n",m,n,tol);
 
-
    srand(0);
    for(int i = 0; i < n; i++)
    {
@@ -64,12 +63,10 @@ int main(int nargs, char **argv)
    iter = 0;
 ///////////////////////////////////////////////////////////////////////////////
    double time_start = omp_get_wtime();
-#pragma omp target data map(alloc:Anew) map(A) map(iter)
-{
    while(err > tol && iter < iter_max)
    {
       err = 0.0;
-      #pragma omp target teams distribute parallel for \
+      #pragma omp parallel for \
         reduction(max:err)
       for(int i = 1; i < n-1; i++)
       {
@@ -81,7 +78,7 @@ int main(int nargs, char **argv)
 	                                                     //3 if abs() counts
          }
       }
-      #pragma omp target teams distribute parallel for
+      #pragma omp parallel for
       for(int i = 1; i < n-1; i++)
       {
          for(int j = 1; j < m-1; j++)
@@ -92,7 +89,6 @@ int main(int nargs, char **argv)
       // printf("iter: %02d\terr: %.5f \ttol: %.5f\n",iter,err,tol);
       iter++;
    }
-}
    double time_stop = omp_get_wtime();
 ///////////////////////////////////////////////////////////////////////////////
    double time_total = time_stop-time_start;

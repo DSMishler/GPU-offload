@@ -24,7 +24,7 @@ void showArray(double *A,int n, int m)
 
 int main(int nargs, char **argv)
 {
-   printf("\nJacobi iteration offload test\n");
+   printf("\nJacobi iteration offload test: GPU Mapping\n");
    int iter, iter_max,n,m;
 
    if(nargs == 1)
@@ -50,7 +50,6 @@ int main(int nargs, char **argv)
    double *Anew = malloc(n*m*sizeof(double));
    assert(Anew);
    printf("m=%d\tn=%d\ttol=%g\n",m,n,tol);
-
 
    srand(0);
    for(int i = 0; i < n; i++)
